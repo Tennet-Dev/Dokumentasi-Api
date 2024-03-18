@@ -22,6 +22,7 @@ Konten:
         - [3.a. Reports](#3a-reports)
         - [3.b. Create](#3b-create)
         - [3.c. Delete](#3c-delete)
+- [Status Kode](#status-kode)
 - [Kesimpuan](#kesimpulan)
 
 
@@ -349,9 +350,16 @@ Contoh Response Sukses:
     "message": "Delete data success"
 }
 ```
+### Status Kode
 
+| Kode	| Deskripsi                                                 |
+|-------|-----------------------------------------------------------|
+|200	|Permintaan berhasil                                        |       
+|400	|Permintaan tidak valid                                     |
+|401	|Unauthorized - Tidak ada atau token akses tidak valid      |
+|404	|Tidak ditemukan                                            |
+|500	|Kesalahan server                                           |
 
----
 
 ### Kesimpulan
 Dokumentasi di atas adalah gambaran umum dari API Client admin api. Pastikan untuk menggunakan autentikasi dengan benar dan memahami kebutuhan spesifik aplikasi Anda saat mengintegrasikan API ini.
