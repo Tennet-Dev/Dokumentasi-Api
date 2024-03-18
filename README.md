@@ -108,38 +108,117 @@ Setiap permintaan harus menyertakan header ‘Tennet-Secret-Key’ dengan nilai 
             ]
         }
         ```
-2. Transaksi
-a. Membuat Transaksi Baru
-Metode: POST
-Endpoint: /transaction/new
-Deskripsi: Membuat transaksi baru antara pengguna saat ini dan penerima yang ditentukan.
-Parameter:
-sender_id (body) - ID pengirim
-receiver_id (body) - ID penerima
-amount (body) - Jumlah yang akan dikirim
-Contoh Permintaan:
-http
-Copy code
-POST /transaction/new HTTP/1.1 Authorization: Bearer <API_KEY> Content-Type: application/json { "sender_id": 123, "receiver_id": 456, "amount": 50.00 }
-Contoh Respon Sukses:
-json
-Copy code
-{ "transaction_id": "abc123", "sender_id": 123, "receiver_id": 456, "amount": 50.00, "timestamp": "2024-03-18T12:00:00Z" }
-Status Kode
-Kode
-Deskripsi
-200
-Permintaan berhasil
-400
-Permintaan tidak valid
-401
-Unauthorized - Tidak ada atau token akses tidak valid
-404
-Tidak ditemukan
-500
-Kesalahan server
+
+2. Vault
+    1. Mendapatkan daftar wallet address
+        
+        Metode: GET\
+        Endpoint: /vault/addresses\
+        Deskripsi: Mendapatkan daftar wallet address.\
+        Parameter: -
+
+        Contoh Request: 
+        ```sh
+        GET /vault/addresses HTTP/1.1
+        Tennet-Secret-Key: <Secret-Key>
+        Request Body:
+        {
+            "filter" : {
+                "asset_symbol": null
+            }
+        }
+        ```
+    
+        Contoh Response Sukses: 
+        ```json
+        {
+            "code": 200,
+            "message": "Getting data successfully",
+            "data": [
+                {
+                    "id": 8,
+                    "asset_name": "Ethereum",
+                    "asset_symbol": "ETH",
+                    "protocol_symbol": "ETH",
+                    "address": "0x8732E38210870B8eF3f3492E3EC0e29666379759",
+                    "legacy_address": "",
+                    "tag": "",
+                    "balance": "0.091",
+                    "price": "55329276.02",
+                    "total": "5034964.12"
+                }
+            ]
+        }
+        ```
+    2. Mendapatkan daftar mutasi wallet address
+        
+        Metode: GET\
+        Endpoint: /vault/mutations\
+        Deskripsi: Mendapatkan daftar mutasi wallet address.\
+        Parameter: -
+
+        Contoh Request: 
+        ```sh
+        GET /vault/mutations HTTP/1.1
+        Tennet-Secret-Key: <Secret-Key>
+        Request Body:
+        {
+            "filter" : {
+                "asset_symbol": null,
+                "business_date_range": {
+                    "start": null,
+                    "end": null
+                },
+                "offset": 0,
+                "limit": 150
+            }
+        }
+        ```
+    
+        Contoh Response Sukses: 
+        ```json
+        {
+            "code": 200,
+            "message": "Getting data successfully",
+            "data_count": 3,
+            "offset": 0,
+            "limit": 150,
+            "data": [
+                {
+                    "id": 18,
+                    "tx_hash": "0xb432d3c3c53329e85e622ece2de59d4fcc0b7da5e20cdae1eb6a8e3dc06f2f30",
+                    "asset": "ETH",
+                    "type": "Transfer In",
+                    "volume": "0.001",
+                    "rate_idr": "Rp 55.329.276",
+                    "total": "Rp 55.329",
+                    "block_height": 0
+                },
+                {
+                    "id": 19,
+                    "tx_hash": "0x118bf70e5f11734ddfd0d070e0ecfa5521372c4612aaba901e46177723934462",
+                    "asset": "ETH",
+                    "type": "Transfer In",
+                    "volume": "0.1",
+                    "rate_idr": "Rp 55.329.276",
+                    "total": "Rp 5.532.928",
+                    "block_height": 0
+                },
+                {
+                    "id": 20,
+                    "tx_hash": "0x10bed46a67e343bf3bf75839b1a20a4f12d41186adc3a71ee62b784cafd28c60",
+                    "asset": "ETH",
+                    "type": "Transfer In",
+                    "volume": "-0.01",
+                    "rate_idr": "Rp 55.329.276",
+                    "total": "Rp -553.293",
+                    "block_height": 0
+                }
+            ]
+        }
+        ```
 
 Kesimpulan
 Dokumentasi di atas adalah gambaran umum dari API Layanan Dompet Digital. Pastikan untuk menggunakan autentikasi dengan benar dan memahami kebutuhan spesifik aplikasi Anda saat mengintegrasikan API ini.
-Untuk informasi lebih lanjut, silakan kunjungi halaman dokumentasi resmi kami atau hubungi tim dukungan kami di support@walletservice.com.
+Untuk informasi lebih lanjut, silakan kunjungi halaman dokumentasi resmi kami atau hubungi tim dukungan kami di support@tennet.id.
 
