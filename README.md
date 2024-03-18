@@ -1,4 +1,28 @@
+<p align="center"><a href="https://depository.id" target="_blank"><img src="https://images.glints.com/unsafe/glints-dashboard.s3.amazonaws.com/company-logo/3761f964beaa6bbe75bbe19852da04a2.jpg" width="500"></a></p>
+
+
+
 # Dokumentasi API Client Admin
+---
+
+Konten:
+- [Gambaran Umum](#gambaran-umum)
+- [Endpoint Dasar](#endpoint-dasar)
+- [Autentikasi](#autentikasi)
+- [Metode Autentikasi](#metode-autentikasi)
+- [Endpoints](#endpoints)
+    - [1. Perusahaan](#1-perusahaan)
+        - [1.a. Profil](#1a-profile)
+        - [1.b. PICs](#1b-pics)
+        - [1.c. Files](#1c-files)
+    - [2. Vault](#2-vault)
+        - [2.a. Addresses](#2a-addresses)
+        - [2.b. Mutations](#2b-mutations)
+    - [3. Crypto Asset Report](#3-crypto-asset-report)
+        - [3.a. Reports](#3a-reports)
+        - [3.b. Create](#3b-create)
+        - [3.c. Delete](#3c-delete)
+- [Kesimpuan](#kesimpulan)
 
 
 ## Gambaran Umum
@@ -6,7 +30,7 @@ Client admin menyediakan API untuk memantau wallet address dan mengelola reporti
 
 ### Endpoint Dasar
 
-Base URL: https://client-admin-api.tennet.id
+Base URL: [https://client-admin-api.tennet.id](https://client-admin-api.tennet.id)
 
 
 ### Autentikasi
@@ -20,205 +44,316 @@ Setiap permintaan harus menyertakan header ‘Tennet-Secret-Key’ dengan nilai 
 
 
 ### Endpoints
-1. Perusahaan
-    1. Mendapatkan Informasi Profil Perusahaan
+### 1. Perusahaan
+#### 1.a. Profile
         
-        Metode: GET\
-        Endpoint: /company/profile\
-        Deskripsi: Mendapatkan informasi profil perusahaan.\
-        Parameter: -
+Metode: GET\
+Endpoint: /company/profile\
+Deskripsi: Mendapatkan informasi profil perusahaan.\
+Parameter: -
 
-        Contoh Request: 
-        ```sh
-        GET /company/profile HTTP/1.1
-        Tennet-Secret-Key: <Secret-Key>
-        ```
-    
-        Contoh Response Sukses: 
-        ```json
+Contoh Request: 
+```sh
+GET /company/profile HTTP/1.1
+Tennet-Secret-Key: <Secret-Key>
+```
+
+Contoh Response Sukses: 
+```json
+{
+    "code": 200,
+    "message": "Getting data successfully",
+    "data": {
+        "id": 24,
+        "name": "PT. ASET KRIPTO INDONESIA",
+        "broker_code": "ABC",
+        "business_name": "Aset Kripto Indonesia",
+        "business_description": "Media investasi yang dapat dimasukkan sebagai komoditas dan dapat diperdagangkan di bursa berjangka",
+        "license_date": "2023-11-29",
+        "registration_number": "12345",
+        "website": "https://example.com"
+    }
+}
+```
+#### 1.b. PICs
+
+Metode: GET\
+Endpoint: /company/pics\
+Deskripsi: Mendapatkan informasi pic terdaftar di perusahaan.\
+Parameter: search filter
+
+Contoh Request: 
+```sh
+GET /company/pics HTTP/1.1
+Tennet-Secret-Key: <Secret-Key>
+Request Body:
+{
+    "filter":{
+        "search":""
+    }
+}
+```
+
+Contoh Response Sukses: 
+```json
+{
+    "code": 200,
+    "message": "Getting data successfully",
+    "data": [
         {
-            "code": 200,
-            "message": "Getting data successfully",
-            "data": {
-                "id": 24,
-                "name": "PT. ASET KRIPTO INDONESIA",
-                "broker_code": "ABC",
-                "business_name": "Aset Kripto Indonesia",
-                "business_description": "Media investasi yang dapat dimasukkan sebagai komoditas dan dapat diperdagangkan di bursa berjangka",
-                "license_date": "2023-11-29",
-                "registration_number": "12345",
-                "website": "https://example.com"
-            }
+            "id": 51,
+            "name": "Hadi PIC",
+            "email": "hadi@tennet.id",
+            "job_title": "IT",
+            "phone_number": "123456789"
         }
-        ```
-    2. Mendapatkan Informasi daftar PIC di perusahaan
+        ...
+    ]
+}
+```
+#### 1.c. Files
+    
+Metode: GET\
+Endpoint: /company/files\
+Deskripsi: Mendapatkan informasi files terdaftar di perusahaan.\
+Parameter: search filter
+
+Contoh Request: 
+```sh
+GET /company/files HTTP/1.1
+Tennet-Secret-Key: <Secret-Key>
+Request Body:
+{
+    "filter":{
+        "search":""
+    }
+}
+```
+
+Contoh Response Sukses: 
+```json
+{
+    "code": 200,
+    "message": "Getting data successfully",
+    "data": [
+        {
+            "id": 20,
+            "name": "Lisensi",
+            "path": "<file_url>",
+            "note": ""
+        }
+        ...
+    ]
+}
+```
+
+### 2. Vault
+#### 2.a. Addresses
+
+Metode: GET\
+Endpoint: /vault/addresses\
+Deskripsi: Mendapatkan daftar wallet address.\
+Parameter: search filter 
+
+Contoh Request: 
+```sh
+GET /vault/addresses HTTP/1.1
+Tennet-Secret-Key: <Secret-Key>
+Request Body:
+{
+    "filter" : {
+        "asset_symbol": null
+    }
+}
+```
+
+Contoh Response Sukses: 
+```json
+{
+    "code": 200,
+    "message": "Getting data successfully",
+    "data": [
+        {
+            "id": 8,
+            "asset_name": "Ethereum",
+            "asset_symbol": "ETH",
+            "protocol_symbol": "ETH",
+            "address": "0x8732E38210870B8eF3f3492E3EC0e29666379759",
+            "legacy_address": "",
+            "tag": "",
+            "balance": "0.091",
+            "price": "55329276.02",
+            "total": "5034964.12"
+        }
+        ...
+    ]
+}
+```
+#### 2.b. Mutations
+
+Metode: GET\
+Endpoint: /vault/mutations\
+Deskripsi: Mendapatkan daftar mutasi wallet address.\
+Parameter: search filter
+
+Contoh Request: 
+```sh
+GET /vault/mutations HTTP/1.1
+Tennet-Secret-Key: <Secret-Key>
+Request Body:
+{
+    "filter" : {
+        "asset_symbol": null,
+        "business_date_range": {
+            "start": null,
+            "end": null
+        },
+        "offset": 0,
+        "limit": 150
+    }
+}
+```
+
+Contoh Response Sukses: 
+```json
+{
+    "code": 200,
+    "message": "Getting data successfully",
+    "data_count": 3,
+    "offset": 0,
+    "limit": 150,
+    "data": [
+        {
+            "id": 18,
+            "tx_hash": "0xb432d3c3c53329e85e622ece2de59d4fcc0b7da5e20cdae1eb6a8e3dc06f2f30",
+            "asset": "ETH",
+            "type": "Transfer In",
+            "volume": "0.001",
+            "rate_idr": "Rp 55.329.276",
+            "total": "Rp 55.329",
+            "block_height": 0
+        }
+        ....
+    ]
+}
+```
+
+### 3. Crypto Asset Report
+#### 3.a. Reports
         
-        Metode: GET\
-        Endpoint: /company/pics\
-        Deskripsi: Mendapatkan informasi pic terdaftar di perusahaan.\
-        Parameter: -
+Metode: GET\
+Endpoint: /crypto-asset-report/reports\
+Deskripsi: Mendapatkan daftar laporan aset kripto.\
+Parameter: search filter
 
-        Contoh Request: 
-        ```sh
-        GET /company/pics HTTP/1.1
-        Tennet-Secret-Key: <Secret-Key>
-        ```
-    
-        Contoh Response Sukses: 
-        ```json
-        {
-            "code": 200,
-            "message": "Getting data successfully",
-            "data": [
-                {
-                    "id": 51,
-                    "name": "Hadi PIC",
-                    "email": "hadi@tennet.id",
-                    "job_title": "IT",
-                    "phone_number": "123456789"
-                }
-            ]
-        }
-        ```
-    2. Mendapatkan Informasi daftar files di perusahaan
-        
-        Metode: GET\
-        Endpoint: /company/files\
-        Deskripsi: Mendapatkan informasi files terdaftar di perusahaan.\
-        Parameter: -
+Contoh Request: 
+```sh
+GET /vault/addresses HTTP/1.1
+Tennet-Secret-Key: <Secret-Key>
+Request Body:
+{
+    "filter" : {
+        "asset_symbol": ["BTC"],
+        "report_date_range": {
+            "start": null,
+            "end":null
+        },
+        "offset": 0,
+        "limit": 100
+    }
+}
+```
 
-        Contoh Request: 
-        ```sh
-        GET /company/files HTTP/1.1
-        Tennet-Secret-Key: <Secret-Key>
-        ```
-    
-        Contoh Response Sukses: 
-        ```json
+Contoh Response Sukses: 
+```json
+{
+    "code": 200,
+    "message": "Getting data successfully",
+    "data_count": 13,
+    "offset": 0,
+    "limit": 100,
+    "data": [
         {
-            "code": 200,
-            "message": "Getting data successfully",
-            "data": [
-                {
-                    "id": 20,
-                    "name": "Lisensi",
-                    "path": "<file_url>",
-                    "note": ""
-                }
-            ]
-        }
-        ```
+            "id": 229156,
+            "institute_id": 24,
+            "institute_name": "PT. ASET KRIPTO INDONESIA",
+            "institute_business": "Aset Kripto Indonesia",
+            "report_date": "2024-01-19 03:21:11",
+            "asset_name": "Bitcoin",
+            "asset_symbol": "BTC",
+            "volume": "3695.0878"
+        },
+        {
+            "id": 300688,
+            "institute_id": 24,
+            "institute_name": "PT. ASET KRIPTO INDONESIA",
+            "institute_business": "Aset Kripto Indonesia",
+            "report_date": "2024-01-19 17:21:03",
+            "asset_name": "Bitcoin",
+            "asset_symbol": "BTC",
+            "volume": "1"
+        },
+        ....
+    ]
+}
+```
+#### 3.b. Create
 
-2. Vault
-    1. Mendapatkan daftar wallet address
-        
-        Metode: GET\
-        Endpoint: /vault/addresses\
-        Deskripsi: Mendapatkan daftar wallet address.\
-        Parameter: -
+Metode: GET\
+Endpoint: /crypto-asset-report/create\
+Deskripsi: menambahkan laporan aset kripto baru.\
+Parameter: data aset kripto
 
-        Contoh Request: 
-        ```sh
-        GET /vault/addresses HTTP/1.1
-        Tennet-Secret-Key: <Secret-Key>
-        Request Body:
-        {
-            "filter" : {
-                "asset_symbol": null
-            }
-        }
-        ```
-    
-        Contoh Response Sukses: 
-        ```json
-        {
-            "code": 200,
-            "message": "Getting data successfully",
-            "data": [
-                {
-                    "id": 8,
-                    "asset_name": "Ethereum",
-                    "asset_symbol": "ETH",
-                    "protocol_symbol": "ETH",
-                    "address": "0x8732E38210870B8eF3f3492E3EC0e29666379759",
-                    "legacy_address": "",
-                    "tag": "",
-                    "balance": "0.091",
-                    "price": "55329276.02",
-                    "total": "5034964.12"
-                }
-            ]
-        }
-        ```
-    2. Mendapatkan daftar mutasi wallet address
-        
-        Metode: GET\
-        Endpoint: /vault/mutations\
-        Deskripsi: Mendapatkan daftar mutasi wallet address.\
-        Parameter: -
+Contoh Request: 
+```sh
+GET /crypto-asset-report/create HTTP/1.1
+Tennet-Secret-Key: <Secret-Key>
+Request Body:
+{
+    "asset_name":"Bitcoin",
+    "asset_symbol":"BTC",
+    "report_date":"2024-03-14 13:57:03",
+    "volume":3
+}
+```
 
-        Contoh Request: 
-        ```sh
-        GET /vault/mutations HTTP/1.1
-        Tennet-Secret-Key: <Secret-Key>
-        Request Body:
-        {
-            "filter" : {
-                "asset_symbol": null,
-                "business_date_range": {
-                    "start": null,
-                    "end": null
-                },
-                "offset": 0,
-                "limit": 150
-            }
-        }
-        ```
-    
-        Contoh Response Sukses: 
-        ```json
-        {
-            "code": 200,
-            "message": "Getting data successfully",
-            "data_count": 3,
-            "offset": 0,
-            "limit": 150,
-            "data": [
-                {
-                    "id": 18,
-                    "tx_hash": "0xb432d3c3c53329e85e622ece2de59d4fcc0b7da5e20cdae1eb6a8e3dc06f2f30",
-                    "asset": "ETH",
-                    "type": "Transfer In",
-                    "volume": "0.001",
-                    "rate_idr": "Rp 55.329.276",
-                    "total": "Rp 55.329",
-                    "block_height": 0
-                },
-                {
-                    "id": 19,
-                    "tx_hash": "0x118bf70e5f11734ddfd0d070e0ecfa5521372c4612aaba901e46177723934462",
-                    "asset": "ETH",
-                    "type": "Transfer In",
-                    "volume": "0.1",
-                    "rate_idr": "Rp 55.329.276",
-                    "total": "Rp 5.532.928",
-                    "block_height": 0
-                },
-                {
-                    "id": 20,
-                    "tx_hash": "0x10bed46a67e343bf3bf75839b1a20a4f12d41186adc3a71ee62b784cafd28c60",
-                    "asset": "ETH",
-                    "type": "Transfer In",
-                    "volume": "-0.01",
-                    "rate_idr": "Rp 55.329.276",
-                    "total": "Rp -553.293",
-                    "block_height": 0
-                }
-            ]
-        }
-        ```
+Contoh Response Sukses: 
+```json
+{
+    "code": 200,
+    "message": "Store data success"
+}
+```
 
-Kesimpulan
-Dokumentasi di atas adalah gambaran umum dari API Layanan Dompet Digital. Pastikan untuk menggunakan autentikasi dengan benar dan memahami kebutuhan spesifik aplikasi Anda saat mengintegrasikan API ini.
-Untuk informasi lebih lanjut, silakan kunjungi halaman dokumentasi resmi kami atau hubungi tim dukungan kami di support@tennet.id.
+#### 3.c. Delete
+
+Metode: GET\
+Endpoint: /crypto-asset-report/delete\
+Deskripsi: menghapus laporan aset kripto.\
+Parameter: id aset kripto yang akan dihapus
+
+Contoh Request: 
+```sh
+GET /crypto-asset-report/delete HTTP/1.1
+Tennet-Secret-Key: <Secret-Key>
+Request Body:
+{
+    "id":"301250"
+}
+```
+
+Contoh Response Sukses: 
+```sh
+{
+    "code": 200,
+    "message": "Delete data success"
+}
+```
+
+
+---
+
+### Kesimpulan
+Dokumentasi di atas adalah gambaran umum dari API Client admin api. Pastikan untuk menggunakan autentikasi dengan benar dan memahami kebutuhan spesifik aplikasi Anda saat mengintegrasikan API ini.
+Untuk informasi lebih lanjut, silakan kunjungi hubungi tim dukungan kami di support@tennet.id.
 
