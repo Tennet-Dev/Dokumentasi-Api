@@ -23,7 +23,6 @@ Konten:
         - [3.b. Create](#3b-create)
         - [3.c. Delete](#3c-delete)
     - [4. Vault Report](#4-vault-report)
-- [Status Kode](#status-kode)
 - [Kesimpuan](#kesimpulan)
 
 
@@ -360,22 +359,22 @@ Parameter: data transaksi
 
 | No | Name                     | Type          | Required | Description |
 |----|--------------------------|---------------|----------|-------------|
-| 1  | ```request_id```         | string        | yes      | generated random uuid|
-| 2  | ```request_timestamp```  | number        | yes      | unix timestamp|
-| 3  | ```institute_id```       | number        | yes      | institute id given by tennet|
-| 4  | ```payload```            | transaction[] | yes      | list of transactions|
+| 1  | `request_id`         | string        | yes      | generated random uuid|
+| 2  | `request_timestamp`  | number        | yes      | unix timestamp|
+| 3  | `institute_id`       | number        | yes      | institute id given by tennet|
+| 4  | `payload`            | transaction[] | yes      | list of transactions|
 
 Transaction Property:
 | No | Name                     | Type          | Required | Description |
 |----|--------------------------|---------------|----------|-------------|
-| 1  | ```tx_id```              | string        | yes      | generated random uuid|
-| 2  | ```client_user_id```     | number        | yes      | user id given by tennet|
-| 3  | ```tx_asset_symbol```    | string        | yes      | asset name |
-| 4  | ```tx_protocol```        | string        | yes      | protocol or network name|
-| 5  | ```tx_type```            | enum          | yes      | `enum[Transfer In, Transfer Out]`|
-| 6  | ```tx_amount```          | string        | yes      | amount of transaction|
-| 7  | ```tx_transfer_fee```    | string        | yes      | transaction fee|
-| 8  | ```tx_timestamp```       | number        | yes      | unix timestamp|
+| 1  | `tx_id`              | string        | yes      | generated random uuid|
+| 2  | `client_user_id`     | number        | yes      | user id given by tennet|
+| 3  | `tx_asset_symbol`    | string        | yes      | asset name |
+| 4  | `tx_protocol`        | string        | yes      | protocol or network name|
+| 5  | `tx_type`            | enum          | yes      | `enum[TRANSFER IN, TRANSFER OUT]`|
+| 6  | `tx_amount`          | string        | yes      | amount of transaction|
+| 7  | `tx_transfer_fee`    | string        | yes      | transaction fee|
+| 8  | `tx_timestamp`       | number        | yes      | unix timestamp|
 
 Contoh Request: 
 POST /vault-report HTTP/1.1
