@@ -22,6 +22,7 @@ Konten:
         - [3.a. Reports](#3a-reports)
         - [3.b. Create](#3b-create)
         - [3.c. Delete](#3c-delete)
+    - [4. Vault Report](#4-vault-report)
 - [Status Kode](#status-kode)
 - [Kesimpuan](#kesimpulan)
 
@@ -248,9 +249,9 @@ Deskripsi: Mendapatkan daftar laporan aset kripto.\
 Parameter: search filter
 
 Contoh Request: 
-```sh
 GET /vault/addresses HTTP/1.1
 Tennet-Secret-Key: <Secret-Key>
+```sh
 Request Body:
 {
     "filter" : {
@@ -350,16 +351,65 @@ Contoh Response Sukses:
     "message": "Delete data success"
 }
 ```
-### Status Kode
+### 4. Vault Report
 
-| Kode	| Deskripsi                                                 |
-|-------|-----------------------------------------------------------|
-|200	|Permintaan berhasil                                        |       
-|400	|Permintaan tidak valid                                     |
-|401	|Unauthorized - Tidak ada atau token akses tidak valid      |
-|404	|Tidak ditemukan                                            |
-|500	|Kesalahan server                                           |
+Metode: POST\
+Endpoint: /vault-report\
+Deskripsi: Mengirimkan data transaksi.\
+Parameter: data transaksi
 
+| No | Name                     | Type          | Required | Description |
+|----|--------------------------|---------------|----------|-------------|
+| 1  | ```request_id```         | string        | yes      | generated random uuid|
+| 2  | ```request_timestamp```  | number        | yes      | unix timestamp|
+| 3  | ```institute_id```       | number        | yes      | institute id given by tennet|
+| 4  | ```payload```            | transaction[] | yes      | list of transactions|
+
+Transaction Property:
+| No | Name                     | Type          | Required | Description |
+|----|--------------------------|---------------|----------|-------------|
+| 1  | ```tx_id```              | string        | yes      | generated random uuid|
+| 2  | ```client_user_id```     | number        | yes      | user id given by tennet|
+| 3  | ```tx_asset_symbol```    | string        | yes      | asset name |
+| 4  | ```tx_protocol```        | string        | yes      | protocol or network name|
+| 5  | ```tx_type```            | enum          | yes      | `enum[Transfer In, Transfer Out]`|
+| 6  | ```tx_amount```          | string        | yes      | amount of transaction|
+| 7  | ```tx_transfer_fee```    | string        | yes      | transaction fee|
+| 8  | ```tx_timestamp```       | number        | yes      | unix timestamp|
+
+Contoh Request: 
+POST /vault-report HTTP/1.1
+Tennet-Secret-Key: <Secret-Key>
+
+Request Body:
+```sh
+{
+    "request_id":"123",
+    "request_timestamp":123456789,
+    "institute_id":2,
+    "payload":[
+        {
+            "tx_id":"1234567",
+            "client_user_id":3,
+            "tx_asset_symbol":"BTC",
+            "tx_protocol":"Bitcoin",
+            "tx_type":"TRANSFER IN",
+            "tx_amount":"0.011",
+            "tx_transfer_fee":"0.00001",
+            "tx_timestamp":123456789
+        },
+        ...
+    ]
+}
+```
+
+Contoh Response Sukses: 
+```json
+{
+    "code": 200,
+    "message": "Store data success"
+}
+```
 
 ### Kesimpulan
 Dokumentasi di atas adalah gambaran umum dari API Client admin api. Pastikan untuk menggunakan autentikasi dengan benar dan memahami kebutuhan spesifik aplikasi Anda saat mengintegrasikan API ini.
