@@ -1,0 +1,383 @@
+{
+	"info": {
+		"_postman_id": "561c731c-fb8f-465b-86ff-7969cbd46a47",
+		"name": "Client-Admin-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16633136",
+		"_collection_link": "https://galactic-meadow-739056.postman.co/workspace/Tennet~b5b45861-dc7a-437e-8ec8-6e58f8d508e6/collection/16633136-561c731c-fb8f-465b-86ff-7969cbd46a47?action=share&source=collection_link&creator=16633136"
+	},
+	"item": [
+		{
+			"name": "Vault",
+			"item": [
+				{
+					"name": "Address",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Tennet-Secret-Key",
+								"value": "{{client-admin-secret}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filter\" : {\n        \"asset_symbol\": []\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/vault/addresses",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"vault",
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mutation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Tennet-Secret-Key",
+								"value": "{{client-admin-secret}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filter\" : {\n        \"asset_symbol\": \"\",\n        \"business_date_range\": {\n            \"start\": null,\n            \"end\": null\n        },\n        \"offset\": 0,\n        \"limit\": 150\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/vault/mutations",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"vault",
+								"mutations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Tennet-Secret-Key",
+								"value": "{{client-admin-secret}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/company/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Files",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Tennet-Secret-Key",
+								"value": "qwertyuiopasdfghjklzxcvbnm",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filter\":{\n        \"search\":0\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/company/files",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company",
+								"files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PICs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Tennet-Secret-Key",
+								"value": "{{client-admin-secret-indodax}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filter\":{\n        \"search\":\"\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/company/pics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company",
+								"pics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crypto Asset Reports",
+			"item": [
+				{
+					"name": "Reports",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Tennet-Secret-Key",
+								"value": "{{client-admin-secret}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filter\" : {\n        \"asset_symbol\": [\"BTC\"],\n        \"report_date_range\": {\n        //     \"start\": \"2024-01-19 17:21:11\",\n        //     \"end\": \"2024-01-19 17:21:11\"\n        },\n        \"offset\": 0,\n        \"limit\": 100\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/crypto-asset-report/reports",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"crypto-asset-report",
+								"reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Tennet-Secret-Key",
+								"value": "{{client-admin-secret-indodax}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"asset_name\":\"Bitcoinfdvfss\",\n    \"asset_symbol\":\"BTCs\",\n    \"report_date\":\"2024-03-14 13:57:03\",\n    \"volume\":10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/crypto-asset-report/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"crypto-asset-report",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Tennet-Secret-Key",
+								"value": "{{client-admin-secret-indodax}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":\"301387\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/crypto-asset-report/delete",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"crypto-asset-report",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vault Report",
+			"item": [
+				{
+					"name": "Vault Report",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Tennet-Secret-Key",
+								"value": "{{client-admin-secret-indodax}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"request_id\":\"123\",\n    \"request_timestamp\":\"123\",\n    \"payload\":[\n        {\n            \"tx_id\":\"1234567\",\n            \"tx_asset_symbol\":\"BTC\",\n            \"tx_protocol\":\"Bitcoin\",\n            \"tx_type\":\"TRANSFER IN\",\n            \"tx_amount\":0.011,\n            \"tx_transfer_fee\":0.00001,\n            \"tx_timestamp\":12345678\n        },\n        {\n            \"tx_id\":\"1234567\",\n            \"tx_asset_symbol\":\"BTC\",\n            \"tx_protocol\":\"Bitcoin\",\n            \"tx_type\":\"TRANSFER IN\",\n            \"tx_amount\":0.011,\n            \"tx_transfer_fee\":0.00001,\n            \"tx_timestamp\":12345678\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/vault-report",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"vault-report"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ping",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Tennet-Secret-Key",
+						"value": "{{client-admin-secret-indodax}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/ping",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

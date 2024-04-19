@@ -23,6 +23,7 @@ Konten:
         - [3.b. Create](#3b-create)
         - [3.c. Delete](#3c-delete)
     - [4. Vault Report](#4-vault-report)
+- [Postman Collection](#kesimpulan)
 - [Kesimpuan](#kesimpulan)
 
 
@@ -300,14 +301,14 @@ Contoh Response Sukses:
 ```
 #### 3.b. Create
 
-Metode: GET\
+Metode: POST\
 Endpoint: /crypto-asset-report/create\
 Deskripsi: menambahkan laporan aset kripto baru.\
 Parameter: data aset kripto
 
 Contoh Request: 
 ```sh
-GET /crypto-asset-report/create HTTP/1.1
+POST /crypto-asset-report/create HTTP/1.1
 Tennet-Secret-Key: <Secret-Key>
 Request Body:
 {
@@ -328,14 +329,14 @@ Contoh Response Sukses:
 
 #### 3.c. Delete
 
-Metode: GET\
+Metode: DELETE\
 Endpoint: /crypto-asset-report/delete\
 Deskripsi: menghapus laporan aset kripto.\
 Parameter: id aset kripto yang akan dihapus
 
 Contoh Request: 
 ```sh
-GET /crypto-asset-report/delete HTTP/1.1
+DELETE /crypto-asset-report/delete HTTP/1.1
 Tennet-Secret-Key: <Secret-Key>
 Request Body:
 {
@@ -405,6 +406,9 @@ Contoh Response Sukses:
     "message": "Store data success"
 }
 ```
+
+### Postman Collection
+[Postman Collection](./Client-Admin-API.postman_collection.json)
 
 ### Kesimpulan
 Dokumentasi di atas adalah gambaran umum dari API Client admin api. Pastikan untuk menggunakan autentikasi dengan benar dan memahami kebutuhan spesifik aplikasi Anda saat mengintegrasikan API ini.
